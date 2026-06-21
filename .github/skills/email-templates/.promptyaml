@@ -1,0 +1,22 @@
+name: email-templates
+description: Email template management and rendering skill with inheritance, variable substitution, and testing patterns
+topics:
+  - email
+  - templates
+  - jinja2
+  - html-emails
+  - plain-text
+  - variable-substitution
+  - template-testing
+applyTo:
+  - path: "**/templates/**/*.html"
+  - path: "**/templates/**/*.txt"
+  - path: "**/*email*.py"
+  - path: "**/test_*template*"
+languageDetection:
+  preferredLanguage: python
+  patterns:
+    - template
+    - jinja2
+    - email
+    - render
