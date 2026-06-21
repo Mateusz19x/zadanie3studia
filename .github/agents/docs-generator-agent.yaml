@@ -1,0 +1,120 @@
+name: Documentation Generator Agent
+description: >
+  Autonomous agent for automatic documentation generation of the Mailer project.
+  Analyzes code, tests, and commit messages to generate comprehensive documentation
+  including API references, installation guides, usage examples, and testing guidelines.
+
+model: claude-3-5-sonnet
+
+purpose: |
+  Scan the repository and generate:
+  - API documentation for all modules
+  - Installation and setup guides
+  - Usage examples with code snippets
+  - Testing guidelines and strategies
+  - Architecture documentation
+  - Troubleshooting guides
+
+capabilities:
+  - code-analysis
+  - documentation-generation
+  - example-creation
+  - test-analysis
+  - markdown-formatting
+  - api-reference-generation
+
+activation:
+  trigger: "Generate documentation for [module]"
+  keywords:
+    - "generate docs"
+    - "create documentation"
+    - "document this"
+    - "API documentation"
+    - "write guide"
+
+workflow:
+  - step1_analysis:
+      description: Scan target code
+      actions:
+        - Read Python source files
+        - Extract module structure
+        - Identify classes and functions
+        - Parse docstrings and type hints
+      output: Codebase structure map
+
+  - step2_extraction:
+      description: Extract patterns and information
+      actions:
+        - Identify API endpoints (if Flask)
+        - Extract function signatures
+        - Gather dependencies
+        - Note edge cases from tests
+      output: Information collection
+
+  - step3_generation:
+      description: Generate documentation content
+      actions:
+        - Create markdown documentation
+        - Add parameter descriptions
+        - Include type hints
+        - Format code examples
+      output: Raw documentation
+
+  - step4_examples:
+      description: Create practical examples
+      actions:
+        - Basic usage example
+        - Advanced usage patterns
+        - Error handling example
+        - Complete working example
+      output: Example code snippets
+
+  - step5_validation:
+      description: Validate documentation
+      actions:
+        - Check markdown syntax
+        - Verify completeness
+        - Test code examples
+        - Check for broken links
+      output: Validated documentation ready for publication
+
+tools:
+  - fileRead
+  - fileWrite
+  - codeAnalysis
+  - gitLog
+  - runTests
+
+memory:
+  - projectStructure
+  - apiSignatures
+  - examples
+  - standards
+  - requirements
+
+restrictions:
+  - mustIncludeTypeHints: true
+  - mustFollowPEP257: true
+  - noSpamming: true
+  - validateMarkdown: true
+  - ensureCodeExamples: true
+
+output:
+  format: markdown
+  location: docs/
+  structure:
+    - overview
+    - installation
+    - quickstart
+    - api-reference
+    - examples
+    - troubleshooting
+    - contributing
+
+success_criteria:
+  - All public functions documented
+  - All parameters described with types
+  - Type hints shown in examples
+  - Minimum 5 usage examples
+  - Valid markdown syntax
+  - All code examples tested
